@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="color-scheme" content="dark" />
+		<title>color-picker</title>
+		<style>
+			@layer reset {
+				*,
+				::before,
+				::after {
+					box-sizing: border-box;
+					margin: 0;
+					padding: 0;
+				}
+				html {
+					font-family: system-ui, sans-serif;
+				}
+				body {
+					min-block-size: 100dvb;
+				}
+				:where(dialog, [popover]) {
+					border: none;
+					background: none;
+					color: inherit;
+					inset: unset;
+					max-width: unset;
+					max-height: unset;
+					overflow: unset;
+				}
+				:where(dialog:not([open], [popover]), [popover]:not(:popover-open)) {
+					display: none !important;
+				}
+			}
+		</style>
+		<script type="module" src="/src/main.tsx"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+</html>

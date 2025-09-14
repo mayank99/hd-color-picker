@@ -1,0 +1,157 @@
+@import "open-props/style";
+@import "open-props/normalize";
+@import "open-props/buttons";
+
+:is(:root, :host) {
+	--conic-checkerboard: repeating-conic-gradient(
+		var(--gray-2) 0% 25%,
+		transparent 0% 50%
+	);
+	--gradient-checkerboard: var(--conic-checkerboard) 50% / 1rem 1rem;
+}
+
+.hd-color-picker {
+	display: grid;
+	gap: 0;
+	border-radius: var(--radius-3);
+}
+
+.colorspace {
+	align-self: start;
+	color: var(--counter-contrast-color);
+	padding-inline-start: var(--size-2);
+	padding-block: var(--size-1);
+	border: 1px solid white;
+	border-color: color-mix(
+		in oklch,
+		var(--counter-contrast-color),
+		transparent 70%
+	);
+	outline: none;
+	background-color: var(--_bg);
+}
+
+.colorspace:not(:hover, :focus) {
+	--_bg: color-mix(in oklch, var(--counter-contrast-color), transparent 90%);
+}
+
+.colorspace:is(:hover, :focus) {
+	border-color: color-mix(
+		in oklch,
+		var(--counter-contrast-color),
+		transparent 50%
+	);
+	color: var(--counter-contrast-color);
+}
+
+.preview {
+	aspect-ratio: var(--ratio-widescreen);
+	min-inline-size: 75vw;
+	display: grid;
+	grid-template-rows: 1fr auto auto;
+	align-content: end;
+	justify-items: start;
+	padding: var(--size-3);
+	box-shadow: var(--inner-shadow-0);
+	background: linear-gradient(var(--user-color) 0 0),
+		var(--gradient-checkerboard);
+}
+
+@media (min-width: 600px) {
+	.preview {
+		min-inline-size: var(--size-content-2);
+	}
+}
+
+.preview > output > code {
+	color: var(--contrast-color);
+	background-color: var(--counter-contrast-color);
+	text-shadow: 0 1px 1px hsl(none none 0% / 25%);
+}
+
+/* @supports (background: hsl(from red h s l)) {
+	.colorspace ,
+	.preview > output > code {
+		background: oklch(from color-contrast(color-contrast(var(--user-color) vs black, white) vs black,white) l c h / .4);
+	}
+} */
+
+.controls {
+	display: grid;
+	gap: var(--size-2);
+	padding: var(--size-3);
+	background-color: var(--surface-2);
+}
+
+@media (prefers-color-scheme: light) {
+	.controls {
+		background-color: white;
+	}
+}
+
+.control {
+	display: flex;
+	place-items: center;
+	gap: var(--size-2);
+}
+
+.control-channel {
+	font-family: var(--font-mono);
+	cursor: default;
+}
+
+.control-input {
+	flex: 2;
+	appearance: none;
+	background-color: var(--surface-1);
+	border-radius: var(--radius-round);
+	block-size: 1rem;
+	box-shadow: var(--inner-shadow-0);
+}
+
+.alpha {
+	background: linear-gradient(to right, #0000, #000),
+		var(--gradient-checkerboard);
+}
+
+.control-input::-webkit-slider-thumb {
+	--_border-size: 4px;
+
+	cursor: grab;
+	appearance: none;
+	border: 4px solid white;
+	height: calc(1rem + (var(--_border-size) * 2));
+	aspect-ratio: 1;
+	border-radius: var(--radius-round);
+	box-shadow: var(--shadow-5), var(--inner-shadow-2);
+}
+
+.control-input:active::-webkit-slider-thumb {
+	cursor: grabbing;
+}
+
+.color-information {
+	cursor: pointer;
+	color: var(--counter-contrast-color);
+	font-size: var(--font-size-3);
+	display: inline-flex;
+	align-items: center;
+	white-space: nowrap;
+}
+
+.color-information > svg {
+	block-size: 0.9em;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.color-information:is(:hover, :focus) > svg {
+	opacity: 1;
+}
+
+.gamut {
+	border-radius: var(--radius-round) 0 0 var(--radius-round);
+	font-size: var(--font-size-0);
+	color: var(--counter-contrast-color);
+	margin-block-start: var(--size-1);
+}
