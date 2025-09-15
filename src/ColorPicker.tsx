@@ -967,7 +967,7 @@ export default function ColorPicker(props: ComponentProps<"dialog">) {
 	);
 }
 
-const picker_value = signal("oklch(75% .3 180deg)");
+export const picker_value = signal("oklch(75% .3 180deg)");
 const colorspace = signal("oklch");
 
 const oklabL = signal("100");

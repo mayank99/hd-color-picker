@@ -1,5 +1,5 @@
 import { render } from "preact";
-import ColorPicker from "./ColorPicker.tsx";
+import ColorPicker, { picker_value } from "./ColorPicker.tsx";
 import { useId } from "preact/hooks";
 
 render(<App />, document.getElementById("app")!);
@@ -20,6 +20,14 @@ function App() {
 					positionTryFallbacks: "flip-inline, flip-block",
 				}}
 			/>
+			<output
+				style={{
+					display: "block",
+					marginBlockStart: 8,
+				}}
+			>
+				Value: <code>{picker_value}</code>
+			</output>
 		</div>
 	);
 }
